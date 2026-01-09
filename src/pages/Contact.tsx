@@ -1,26 +1,14 @@
 import { useState } from 'react';
-import { Mail, Clock, CheckCircle, Send, MessageSquare, Phone } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Clock, CheckCircle, Send, MessageSquare } from 'lucide-react';
 import { useForm, ValidationError } from '@formspree/react';
 import { Helmet } from 'react-helmet-async';
 import PageHeader from '../components/PageHeader';
-import Button from '../components/Button';
 
 export default function Contact() {
   const [state, handleSubmit] = useForm("mqezzzkq");
 
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    problem: ''
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
+  const [consentChecked, setConsentChecked] = useState(false);
 
   if (state.succeeded) {
     return (
@@ -159,6 +147,28 @@ export default function Contact() {
                     placeholder="Describe the operational challenge you're facing, current pain points, and what success would look like..."
                   />
                   <ValidationError prefix="Message" field="message" errors={state.errors} className="text-red-500 text-sm mt-1" />
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <input
+                    type="checkbox"
+                    id="consent"
+                    checked={consentChecked}
+                    onChange={(e) => setConsentChecked(e.target.checked)}
+                    required
+                    className="mt-1 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                  />
+                  <label htmlFor="consent" className="text-sm text-gray-700">
+                    I agree to the{' '}
+                    <Link to="/legal/terms-conditions" className="text-indigo-600 hover:text-indigo-500 underline">
+                      Terms & Conditions
+                    </Link>{' '}
+                    and{' '}
+                    <Link to="/legal/privacy-policy" className="text-indigo-600 hover:text-indigo-500 underline">
+                      Privacy Policy
+                    </Link>
+                    . I understand that my information will be used to respond to my inquiry.
+                  </label>
                 </div>
 
                 <div className="text-center">

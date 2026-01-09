@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-400 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           <div>
             <Link to="/" className="flex items-center mb-4">
               <img
@@ -40,6 +40,30 @@ export default function Footer() {
               <div className="text-sm">Automation & Integration</div>
               <div className="text-sm">Business Platforms</div>
               <div className="text-sm">Application Modernization</div>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-white font-semibold mb-4">Legal</h3>
+            <div className="space-y-2">
+              <Link to="/legal/privacy-policy" className="block text-sm hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
+              <Link to="/legal/terms-conditions" className="block text-sm hover:text-white transition-colors">
+                Terms & Conditions
+              </Link>
+              <Link to="/legal/cookie-policy" className="block text-sm hover:text-white transition-colors">
+                Cookie Policy
+              </Link>
+              <Link to="/legal/refund-cancellation" className="block text-sm hover:text-white transition-colors">
+                Refund Policy
+              </Link>
+              <Link to="/legal/shipping-delivery" className="block text-sm hover:text-white transition-colors">
+                Shipping Policy
+              </Link>
+              <Link to="/legal/subscription-policy" className="block text-sm hover:text-white transition-colors">
+                Subscription Policy
+              </Link>
             </div>
           </div>
 
