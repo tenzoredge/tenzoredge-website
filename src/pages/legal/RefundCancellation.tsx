@@ -7,7 +7,7 @@ export default function RefundCancellation() {
       <Helmet>
         <title>Refund & Cancellation Policy | Tenzor Edge</title>
         <meta name="description" content="Refund & Cancellation Policy for Tenzor Edge - Learn about our refund and cancellation procedures." />
-        <link rel="canonical" href="https://tenzor.vercel.app/legal/refund-cancellation" />
+        <link rel="canonical" href="https://tenzoredge.com/legal/refund-cancellation" />
       </Helmet>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

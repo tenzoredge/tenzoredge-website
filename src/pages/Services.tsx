@@ -1,197 +1,119 @@
-import { Server, Workflow, Box, Zap, AlertCircle, ArrowRight, CheckCircle } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
+import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import Button from '../components/Button';
+import { ArrowRight, ArrowDown, Check } from 'lucide-react';
+import SEO from '../components/SEO';
+import CTASection from '../components/CTASection';
 import PageHeader from '../components/PageHeader';
+import { services, ServiceKey } from '../data/services';
+import { ConsultingBlueprint } from '../components/illustrations/ConsultingDiagrams';
+import { InfraTopology } from '../components/illustrations/InfrastructureDiagrams';
+import { WorkflowTransformation } from '../components/illustrations/BusinessDiagrams';
+import { AiAgentsDiagram } from '../components/illustrations/AiDiagrams';
+import { ProductLifecycle } from '../components/illustrations/ProductDiagrams';
+
+const visuals: Record<ServiceKey, ReactNode> = {
+  consulting: <ConsultingBlueprint />,
+  infrastructure: <InfraTopology />,
+  business: <WorkflowTransformation />,
+  ai: <AiAgentsDiagram />,
+  product: <ProductLifecycle />,
+};
+
+/* A one-line answer to "why would I need this?" for each capability */
+const when: Record<ServiceKey, string> = {
+  consulting: 'You’re facing a significant technology decision or investment.',
+  infrastructure: 'Your servers, network or cloud are unreliable, insecure or too expensive.',
+  business: 'Your team re-keys data and runs the business on spreadsheets and email.',
+  ai: 'Your engineering team wants real, governed value from AI.',
+  product: 'You have a product to build and no senior owner for it.',
+};
 
 export default function Services() {
   return (
     <>
-      <Helmet>
-        <title>Tenzor - Services | Operational Excellence Solutions</title>
-        <meta name="description" content="Explore Tenzor's comprehensive services: Infrastructure Management, Automation & Integration, Business Platforms, and Application Modernization for SMBs." />
-        <meta name="keywords" content="services, infrastructure management, automation, integration, business platforms, application modernization, operational excellence" />
-        <link rel="canonical" href="https://tenzor.vercel.app/services" />
-        <meta property="og:title" content="Tenzor Services - Operational Excellence Solutions" />
-        <meta property="og:description" content="Discover our comprehensive suite of services designed to drive operational excellence and business transformation." />
-        <meta property="og:url" content="https://tenzor.vercel.app/services" />
-        <meta property="og:type" content="website" />
-      </Helmet>
-
-      <div>
-      <PageHeader
-        title="Our Services"
-        subtitle="Complete operational solutions designed for small and medium businesses"
+      <SEO
+        title="Services | Tenzor Edge"
+        description="Five connected capabilities: technology consulting and solution architecture, infrastructure and cloud engineering, business solutions and digital transformation, AI-enabled software engineering, and product and technology leadership."
+        canonicalPath="/services"
       />
 
-      <section id="infrastructure" className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ServiceSection
-            icon={<Server size={48} />}
-            title="Infrastructure & System Management"
-            problem="SMBs often deal with unstable systems, recurring downtime, inconsistent setups, and poor visibility — all of which slow down business."
-            whatWeDo={[
-              'Server and VM provisioning (Windows Server, Ubuntu, Hyper-V, AWS)',
-              'Network monitoring and uptime management',
-              'Backup, recovery, and failover planning',
-              'Security hardening and log audits',
-              'Standardization and documentation'
-            ]}
-            outcomes={[
-              'Reliable systems',
-              'Reduced downtime',
-              'Predictable performance',
-              'Clear infrastructure visibility'
-            ]}
-          />
-        </div>
-      </section>
+      <PageHeader
+        badge="Our capabilities"
+        title={
+          <>
+            Five capabilities. One connected view of your technology<span className="text-brand-edge-red">.</span>
+          </>
+        }
+        subtitle="Strategy, infrastructure, applications and software delivery are designed together — so a decision in one area doesn’t create a problem in another."
+        breadcrumbs={[{ label: 'Services' }]}
+        visual={
+          <nav aria-label="Services on this page" className="rounded-2xl border border-white/10 bg-brand-ink p-2">
+            {services.map((s) => {
+              const Icon = s.icon;
+              return (
+                <a
+                  key={s.key}
+                  href={`#${s.key}`}
+                  className="group flex items-center gap-4 rounded-xl px-4 py-4 transition-colors hover:bg-white/5"
+                >
+                  <span className="font-heading text-sm font-semibold text-brand-edge-red">{s.index}</span>
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-brand-night text-white group-hover:text-brand-edge-red">
+                    <Icon size={18} aria-hidden />
+                  </span>
+                  <span className="flex-1">
+                    <span className="block font-heading text-[15px] font-semibold text-white sm:text-base">{s.title}</span>
+                    <span className="block text-sm text-brand-silver">{s.tagline}</span>
+                  </span>
+                  <ArrowDown size={16} className="shrink-0 text-brand-silver group-hover:text-brand-edge-red" aria-hidden />
+                </a>
+              );
+            })}
+          </nav>
+        }
+      />
 
-      <section id="automation" className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ServiceSection
-            icon={<Workflow size={48} />}
-            title="Automation & Integration"
-            problem="Teams waste hours on repetitive tasks: data entry, reporting, reconciliation, customer follow-ups, file processing, and manual workflows."
-            whatWeDo={[
-              'RPA automation (Robocorp, Playwright, custom bots)',
-              'Workflow automation across tools and platforms',
-              'Intelligent data extraction and clean-up',
-              'System-to-system integrations'
-            ]}
-            outcomes={[
-              'Less manual work',
-              'Fewer errors',
-              'Faster execution',
-              'Teams free to focus on real work'
-            ]}
-          />
-        </div>
-      </section>
+      {services.map((s, i) => {
+        const reversed = i % 2 === 1;
+        return (
+          <section
+            key={s.key}
+            id={s.key}
+            className={`scroll-mt-20 py-20 md:py-28 ${i % 2 === 0 ? 'bg-white' : 'bg-brand-mist'}`}
+          >
+            <div className="container-site grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+              <div className={`lg:col-span-5 ${reversed ? 'lg:order-2' : ''}`}>
+                <div className="font-heading text-6xl font-semibold leading-none text-brand-night/10 sm:text-7xl">{s.index}</div>
+                <h2 className="type-h2 mt-4 text-brand-night">{s.title}</h2>
+                <p className="mt-5 text-lg leading-relaxed text-brand-slate">{s.summary}</p>
+                <p className="mt-6 border-l-2 border-brand-edge-red pl-4 text-[15px] text-brand-night">
+                  <span className="font-semibold">Right for you when: </span>
+                  {when[s.key]}
+                </p>
+                <ul className="mt-7 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
+                  {s.highlights.map((h) => (
+                    <li key={h} className="flex gap-2.5 text-[15px] text-brand-slate">
+                      <Check size={16} className="mt-0.5 shrink-0 text-brand-edge-red" aria-hidden />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+                <Link to={s.path} className="btn-ghost-light mt-9">
+                  Explore {s.shortTitle} <ArrowRight size={16} aria-hidden />
+                </Link>
+              </div>
+              <div className={`lg:col-span-7 ${reversed ? 'lg:order-1' : ''}`}>
+                <div className="figure-frame">{visuals[s.key]}</div>
+              </div>
+            </div>
+          </section>
+        );
+      })}
 
-      <section id="platforms" className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ServiceSection
-            icon={<Box size={48} />}
-            title="Business Platforms & Tools"
-            problem="SMBs often rely on spreadsheets, outdated software, or a mix of tools that don't talk to each other."
-            whatWeBuild={[
-              'Asset management',
-              'Client onboarding systems',
-              'AMC & service contract management',
-              'Ticketing and service desk systems',
-              'Operational dashboards',
-              'Audit & monitoring tools'
-            ]}
-            outcomes={[
-              'Lightweight, cost-effective systems',
-              'Built around your exact workflow',
-              'No unnecessary features',
-              'Easy to adopt across teams'
-            ]}
-          />
-        </div>
-      </section>
-
-      <section id="modernization" className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ServiceSection
-            icon={<Zap size={48} />}
-            title="Application Modernization"
-            problem="Legacy applications slow down operations, block integrations, and create daily friction."
-            whatWeDo={[
-              'Migrate old systems to modern stacks',
-              'Rebuild or refactor legacy applications',
-              'Improve performance, stability, and UX',
-              'Implement best practices without disrupting business'
-            ]}
-            outcomes={[
-              'Faster applications',
-              'Reduced maintenance cost',
-              'Future-ready systems'
-            ]}
-          />
-        </div>
-      </section>
-
-      <section className="py-20 bg-blue-600 text-white text-center">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold mb-6">
-            Ready to fix your operational challenges?
-          </h2>
-          <p className="text-xl mb-10 text-blue-100">
-            Let's discuss how we can help your business run smoothly.
-          </p>
-          <Link to="/contact">
-            <Button variant="secondary">Book a Clarity Call</Button>
-          </Link>
-        </div>
-      </section>
-    </div>
+      <CTASection
+        title="Not sure where to start?"
+        subtitle="Most engagements begin with a conversation about the problem, not the service. Tell us what’s getting in the way and we’ll suggest the right starting point."
+        secondary={{ label: 'How we work', to: '/about' }}
+      />
     </>
-  );
-}
-
-interface ServiceSectionProps {
-  icon: React.ReactNode;
-  title: string;
-  problem: string;
-  whatWeDo?: string[];
-  whatWeBuild?: string[];
-  outcomes: string[];
-}
-
-function ServiceSection({ icon, title, problem, whatWeDo, whatWeBuild, outcomes }: ServiceSectionProps) {
-  return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-      <div>
-        <div className="text-blue-600 mb-6">{icon}</div>
-        <h2 className="text-3xl font-bold mb-6 text-gray-900">{title}</h2>
-
-        <div className="mb-8">
-          <div className="flex items-start mb-4">
-            <AlertCircle className="text-red-500 mr-3 mt-1 flex-shrink-0" size={24} />
-            <div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">The Problem</h3>
-              <p className="text-gray-700 leading-relaxed">{problem}</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mb-8">
-          <div className="flex items-start">
-            <ArrowRight className="text-blue-600 mr-3 mt-1 flex-shrink-0" size={24} />
-            <div>
-              <h3 className="text-lg font-bold text-gray-900 mb-4">
-                {whatWeDo ? 'What We Do' : 'What We Build'}
-              </h3>
-              <ul className="space-y-3">
-                {(whatWeDo || whatWeBuild)?.map((item, index) => (
-                  <li key={index} className="text-gray-700 flex items-start">
-                    <span className="text-blue-600 mr-2 mt-1">•</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="bg-gray-900 text-white p-8 lg:p-10">
-        <div className="flex items-start mb-6">
-          <CheckCircle className="text-green-400 mr-3 mt-1 flex-shrink-0" size={24} />
-          <h3 className="text-2xl font-bold">Outcome</h3>
-        </div>
-        <ul className="space-y-4">
-          {outcomes.map((outcome, index) => (
-            <li key={index} className="flex items-start text-lg">
-              <span className="text-green-400 mr-3">✓</span>
-              <span>{outcome}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
   );
 }

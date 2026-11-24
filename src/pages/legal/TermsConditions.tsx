@@ -7,7 +7,7 @@ export default function TermsConditions() {
       <Helmet>
         <title>Terms & Conditions | Tenzor Edge</title>
         <meta name="description" content="Terms & Conditions for Tenzor Edge - Read our terms of service and usage policies." />
-        <link rel="canonical" href="https://tenzor.vercel.app/legal/terms-conditions" />
+        <link rel="canonical" href="https://tenzoredge.com/legal/terms-conditions" />
       </Helmet>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

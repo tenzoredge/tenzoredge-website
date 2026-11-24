@@ -7,7 +7,7 @@ export default function CookiePolicy() {
       <Helmet>
         <title>Cookie Policy | Tenzor Edge</title>
         <meta name="description" content="Cookie Policy for Tenzor Edge - Learn how we use cookies and similar technologies on our website." />
-        <link rel="canonical" href="https://tenzor.vercel.app/legal/cookie-policy" />
+        <link rel="canonical" href="https://tenzoredge.com/legal/cookie-policy" />
       </Helmet>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

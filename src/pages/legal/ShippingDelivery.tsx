@@ -7,7 +7,7 @@ export default function ShippingDelivery() {
       <Helmet>
         <title>Shipping & Delivery Policy | Tenzor Edge</title>
         <meta name="description" content="Shipping & Delivery Policy for Tenzor Edge - Learn about how our digital services are delivered." />
-        <link rel="canonical" href="https://tenzor.vercel.app/legal/shipping-delivery" />
+        <link rel="canonical" href="https://tenzoredge.com/legal/shipping-delivery" />
       </Helmet>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

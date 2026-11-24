@@ -2,86 +2,253 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    color: #0b0d12;
+    background-color: #ffffff;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
+  /*
+   * Headings inherit their colour from the section they sit in.
+   * (Previously forced to Night, which made every heading on a dark
+   * section nearly invisible.)
+   */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Sora', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    letter-spacing: -0.02em;
+    color: inherit;
+    text-wrap: balance;
   }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
 
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
+  p {
+    text-wrap: pretty;
   }
 }
 
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8;
   }
-  50% {
-    transform: scale(1.05);
+
+  /* Section surfaces */
+  .surface-dark {
+    @apply bg-brand-night text-white;
+  }
+  .surface-light {
+    @apply bg-white text-brand-night;
+  }
+  .surface-mist {
+    @apply bg-brand-mist text-brand-night;
+  }
+
+  /* Eyebrow / label — Inter SemiBold caps, tracked (brand spec) */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-[13px] font-semibold uppercase tracking-[0.16em];
+  }
+  .eyebrow::before {
+    content: '';
+    @apply block h-px w-6 bg-brand-edge-red;
+  }
+  .eyebrow-dark {
+    @apply eyebrow text-brand-silver;
+  }
+  .eyebrow-light {
+    @apply eyebrow text-brand-slate;
+  }
+
+  /* Type scale (brand: H1 Sora Bold 56/64, H2 SemiBold 40/48, H3 SemiBold 28/36) */
+  .type-display {
+    @apply font-heading font-bold tracking-tight text-[2.5rem] leading-[1.1] sm:text-[3.25rem] lg:text-[3.5rem] lg:leading-[1.12] xl:text-[3.75rem];
+  }
+  .type-h1 {
+    @apply font-heading font-bold tracking-tight text-[2.25rem] leading-[1.12] sm:text-5xl lg:text-[3.5rem] lg:leading-[1.14];
+  }
+  .type-h2 {
+    @apply font-heading font-semibold tracking-tight text-[1.875rem] leading-[1.2] sm:text-[2.25rem] lg:text-[2.5rem] lg:leading-[1.2];
+  }
+  .type-h3 {
+    @apply font-heading font-semibold tracking-tight text-xl leading-snug sm:text-2xl;
+  }
+  .type-lead {
+    @apply text-lg leading-[1.6] sm:text-xl sm:leading-[1.6];
+  }
+
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-[15px] font-semibold transition-all duration-200;
+  }
+  .btn-primary {
+    @apply btn bg-brand-edge-red text-white shadow-[0_10px_30px_-12px_rgba(255,45,61,0.7)] hover:bg-brand-neon-red hover:-translate-y-0.5 active:translate-y-0;
+  }
+  .btn-ghost-dark {
+    @apply btn border border-white/20 text-white hover:border-white/40 hover:bg-white/5;
+  }
+  .btn-ghost-light {
+    @apply btn border border-brand-night/15 text-brand-night hover:border-brand-night/40 hover:bg-brand-mist;
+  }
+
+  .link-arrow {
+    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-brand-edge-red transition-colors hover:text-brand-crimson;
+  }
+  .link-arrow-dark {
+    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-white transition-colors hover:text-brand-edge-red;
+  }
+
+  /* Framed figure that holds a diagram on any background */
+  .figure-frame {
+    @apply relative overflow-hidden rounded-2xl border border-white/10 bg-brand-ink p-5 shadow-figure sm:p-8;
   }
 }
 
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
+/* Signature brand gradient (icon & small accents only, per guidelines) */
+.bg-signature-gradient {
+  background: linear-gradient(135deg, #c40f2e 0%, #ff1f3d 50%, #ff7a2f 100%);
 }
 
-.animate-slide-in-left {
-  animation: slideInLeft 0.6s ease-out forwards;
+/* Subtle blueprint grid backgrounds */
+.tech-grid-pattern {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(91, 96, 112, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(91, 96, 112, 0.08) 1px, transparent 1px);
 }
 
-.animate-slide-in-right {
-  animation: slideInRight 0.6s ease-out forwards;
+.tech-grid-pattern-dark {
+  background-size: 40px 40px;
+  background-image: linear-gradient(to right, rgba(163, 169, 184, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(163, 169, 184, 0.06) 1px, transparent 1px);
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
+.grid-fade {
+  -webkit-mask-image: radial-gradient(ellipse at 70% 40%, #000 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse at 70% 40%, #000 20%, transparent 75%);
+}
+
+/* ------------------------------------------------------------------ */
+/* Diagram system (SVG illustrations)                                  */
+/* ------------------------------------------------------------------ */
+.dg text {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+.dg .dg-t {
+  font-size: 14px;
+  font-weight: 600;
+  fill: #f2f3f5;
+}
+.dg .dg-h {
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  fill: #ffffff;
+  letter-spacing: -0.01em;
+}
+.dg .dg-s {
+  font-size: 12px;
+  font-weight: 400;
+  fill: #a3a9b8;
+}
+.dg .dg-k {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  fill: #a3a9b8;
+}
+.dg .dg-kr {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  fill: #ff2d3d;
+}
+
+/* Reveal: nodes fade in, wires draw in, once, when the figure enters view */
+.dg .dg-node {
+  opacity: 0;
+  transform: translateY(6px);
+  transform-box: fill-box;
+  transition: opacity 600ms ease, transform 600ms ease;
+  transition-delay: var(--d, 0ms);
+}
+.dg .dg-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 900ms ease;
+  transition-delay: var(--d, 0ms);
+}
+.dg.is-inview .dg-node {
+  opacity: 1;
+  transform: none;
+}
+.dg.is-inview .dg-draw {
+  stroke-dashoffset: 0;
+}
+
+/* HTML reveal helper */
+.reveal > * {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.reveal.is-inview > * {
+  opacity: 1;
+  transform: none;
+}
+.reveal.is-inview > *:nth-child(2) { transition-delay: 90ms; }
+.reveal.is-inview > *:nth-child(3) { transition-delay: 180ms; }
+.reveal.is-inview > *:nth-child(4) { transition-delay: 270ms; }
+.reveal.is-inview > *:nth-child(5) { transition-delay: 360ms; }
+.reveal.is-inview > *:nth-child(6) { transition-delay: 450ms; }
+.reveal.is-inview > *:nth-child(7) { transition-delay: 540ms; }
+
+/* Progress line for process flows */
+.flow-line {
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 1400ms cubic-bezier(0.22, 1, 0.36, 1) 200ms;
+}
+.flow-line-v {
+  transform-origin: center top;
+  transform: scaleY(0);
+  transition: transform 1400ms cubic-bezier(0.22, 1, 0.36, 1) 200ms;
+}
+.is-inview .flow-line,
+.is-inview .flow-line-v {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-  50% {
-    transform: translateY(-10px);
+  .dg .dg-node,
+  .reveal > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .dg .dg-draw {
+    stroke-dashoffset: 0 !important;
+    transition: none !important;
+  }
+  .dg .dg-pulse {
+    display: none;
+  }
+  .flow-line,
+  .flow-line-v {
+    transform: none !important;
+    transition: none !important;
   }
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Glass morphism effect */
-.glass {
-  background: rgba(255, 255, 255, 0.1);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+/* Clean custom focus ring */
+*:focus-visible {
+  outline: 2px solid #ff2d3d;
+  outline-offset: 2px;
 }

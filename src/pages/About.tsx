@@ -1,213 +1,210 @@
-import { Target, Eye, Gem, CheckCircle, Rocket, Shield, Users, Award } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
+import { Linkedin, MapPin, Code2, Cloud, ShieldCheck, TestTube2, Building2 } from 'lucide-react';
 import PageHeader from '../components/PageHeader';
-import Button from '../components/Button';
-import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
+import CTASection from '../components/CTASection';
+import SectionIntro from '../components/SectionIntro';
+import { Reveal } from '../components/illustrations/kit';
+
+const principles = [
+  { title: 'Systems over tools', text: 'New software rarely fixes a disorganised process. Good design and integration do.' },
+  { title: 'Only what you can sustain', text: 'The leanest reliable solution that meets the need — not the most impressive one.' },
+  { title: 'Decisions over documents', text: 'Our work should help leadership decide and act, not fill a binder.' },
+  { title: 'Less dependency over time', text: 'Maintainable systems, clear documentation and teams that can run them.' },
+];
+
+const triad = [
+  { word: 'Precision', text: 'Clear scope, clean execution and outcomes you can measure.' },
+  { word: 'Performance', text: 'Systems that are fast, reliable and ready to grow with the business.' },
+  { word: 'Progress', text: 'Moving clients forward with modern technology and continuous improvement.' },
+];
+
+const specialists = [
+  { icon: Code2, label: 'Software engineering' },
+  { icon: Cloud, label: 'Cloud & infrastructure' },
+  { icon: ShieldCheck, label: 'Security' },
+  { icon: TestTube2, label: 'Quality & testing' },
+];
+
+const career = [
+  'IT administration',
+  'Networking',
+  'Cloud & on-premises infrastructure',
+  'Business applications',
+  'System integration',
+  'Digital transformation',
+  'Product ownership',
+  'AI-enabled SDLC',
+  'Technology consulting',
+];
+
+/** How an engagement is staffed: one accountable lead, specialists as needed. */
+function OperatingModel() {
+  return (
+    <div className="figure-frame" role="img" aria-label="Operating model: your business works directly with the Founder and Principal Solution Architect, who leads a network of specialist delivery partners in software engineering, cloud and infrastructure, security, and quality and testing.">
+      <div className="flex flex-col items-center" aria-hidden>
+        <div className="flex w-full max-w-xs items-center justify-center gap-3 rounded-xl border border-white/10 bg-brand-panel px-5 py-4 text-white">
+          <Building2 size={18} className="text-brand-silver" />
+          <span className="font-heading font-semibold">Your business</span>
+        </div>
+        <div className="h-8 w-px bg-brand-edge-red" />
+        <div className="w-full max-w-sm rounded-xl border border-brand-edge-red/60 bg-brand-edge-red/10 px-5 py-5 text-center">
+          <div className="font-heading text-lg font-semibold text-white">Founder &amp; Principal Solution Architect</div>
+          <div className="mt-1 text-sm text-brand-silver">One accountable lead for architecture and delivery</div>
+        </div>
+        <div className="h-8 w-px bg-white/25" />
+        <div className="relative w-full">
+          <div className="absolute left-[12.5%] right-[12.5%] top-0 hidden h-px bg-white/25 sm:block" />
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:pt-6">
+            {specialists.map((s) => {
+              const Icon = s.icon;
+              return (
+                <div key={s.label} className="relative rounded-xl border border-white/10 bg-brand-panel px-3 py-4 text-center">
+                  <span className="absolute -top-6 left-1/2 hidden h-6 w-px bg-white/25 sm:block" />
+                  <Icon size={18} className="mx-auto text-brand-silver" />
+                  <div className="mt-2 text-[13px] font-medium leading-snug text-white">{s.label}</div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-4 text-center text-[13px] font-semibold uppercase tracking-[0.14em] text-brand-silver">
+            Specialist delivery partners — engaged as needed
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function About() {
   return (
     <>
-      <Helmet>
-        <title>Tenzor - About Us | Our Story & Mission</title>
-        <meta name="description" content="Learn about Tenzor's mission to drive operational excellence. Meet our founder and discover how we transform businesses through innovative consulting solutions." />
-        <meta name="keywords" content="about tenzor, operational excellence, business consulting, founder, mission, vision, values" />
-        <link rel="canonical" href="https://tenzor.vercel.app/about" />
-        <meta property="og:title" content="About Tenzor - Our Story & Mission" />
-        <meta property="og:description" content="Discover Tenzor's commitment to operational excellence and meet the founder driving business transformation." />
-        <meta property="og:url" content="https://tenzor.vercel.app/about" />
-        <meta property="og:type" content="website" />
-      </Helmet>
-
-      <div>
-      <PageHeader
-        title="Our Story"
-        subtitle="Building operational excellence for small and medium businesses"
+      <SEO
+        title="About Tenzor Edge – Precision. Performance. Progress."
+        description="Tenzor Edge is a founder-led technology consulting and engineering company with a flexible specialist delivery model, based in Bengaluru, India."
+        canonicalPath="/about"
       />
 
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-lg text-gray-700 leading-relaxed space-y-6 text-center">
-            <p className="text-xl font-medium text-gray-900 mb-8">
-              Most SMBs operate in a state of constant pressure — disconnected systems, manual processes, unreliable infrastructure, and endless fire-fighting.
+      <PageHeader
+        badge="About Tenzor Edge"
+        title="A founder‑led technology consulting and engineering company."
+        subtitle="Senior architectural judgement on every engagement, with specialist engineers brought in for exactly what each project needs."
+        breadcrumbs={[{ label: 'About' }]}
+        visual={<OperatingModel />}
+      />
+
+      {/* What we believe */}
+      <section className="bg-white py-20 md:py-28">
+        <div className="container-site grid gap-14 lg:grid-cols-12">
+          <div className="lg:col-span-6">
+            <p className="font-heading text-3xl font-semibold leading-tight text-brand-night sm:text-[2.5rem] sm:leading-[1.2]">
+              Most business technology problems are <span className="text-brand-edge-red">architecture</span> problems — not
+              a shortage of software.
             </p>
-            <div className="bg-gradient-to-r from-indigo-50 to-purple-50 p-8 rounded-2xl border border-indigo-100">
-              <p className="font-bold text-2xl text-indigo-900 mb-4">
-                Tenzor was created to change that.
-              </p>
-              <p className="text-lg text-gray-700">
-                We don't sell tools or isolated services.<br />
-                <span className="font-semibold text-indigo-700">We build complete operational stability.</span>
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-              <div className="text-center p-6 bg-gray-50 rounded-xl">
-                <p className="text-indigo-600 font-semibold">We bring clarity to complexity</p>
-              </div>
-              <div className="text-center p-6 bg-gray-50 rounded-xl">
-                <p className="text-indigo-600 font-semibold">We automate the repetitive</p>
-              </div>
-              <div className="text-center p-6 bg-gray-50 rounded-xl">
-                <p className="text-indigo-600 font-semibold">We design systems that scale</p>
-              </div>
-            </div>
-            <p className="text-xl font-medium text-gray-900 mt-12">
-              Tenzor is what SMBs wish they had all along: a trusted technical partner who handles everything end-to-end.
+            <p className="mt-8 max-w-xl text-lg leading-relaxed text-brand-slate">
+              Businesses are surrounded by products, platforms and AI promises, yet many still run on fragmented tools and
+              manual workarounds. Tenzor Edge bridges business strategy and engineering — as an independent architect and
+              delivery partner.
             </p>
+          </div>
+          <div className="lg:col-span-6">
+            <h2 className="type-h3 text-brand-night">How we work</h2>
+            <Reveal as="ul" className="reveal mt-8 grid gap-x-8 gap-y-8 sm:grid-cols-2">
+              {principles.map((p) => (
+                <li key={p.title} className="border-t-2 border-brand-night pt-5">
+                  <h3 className="font-heading text-lg font-semibold text-brand-night">{p.title}</h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-brand-slate">{p.text}</p>
+                </li>
+              ))}
+            </Reveal>
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
-              <div className="flex items-center mb-6">
-                <div className="bg-indigo-100 p-3 rounded-xl mr-4">
-                  <Target className="text-indigo-600" size={32} />
-                </div>
-                <h2 className="text-3xl font-bold text-gray-900">Mission</h2>
+      {/* Brand triad */}
+      <section className="bg-brand-night py-20 text-white md:py-24">
+        <div className="container-site">
+          <div className="grid gap-12 md:grid-cols-3 md:gap-0 md:divide-x md:divide-white/10">
+            {triad.map((t, i) => (
+              <div key={t.word} className={i === 0 ? 'md:pr-10' : 'md:px-10'}>
+                <div className="font-heading text-sm font-semibold text-brand-edge-red">0{i + 1}</div>
+                <h2 className="mt-3 font-heading text-4xl font-bold text-white sm:text-5xl">
+                  {t.word}
+                  <span className="text-brand-edge-red">.</span>
+                </h2>
+                <p className="mt-4 max-w-xs text-[17px] leading-relaxed text-brand-silver">{t.text}</p>
               </div>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                To automate, stabilize, and scale the core operations of small and medium businesses with precision, clarity, and reliability.
-              </p>
-            </div>
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
-              <div className="flex items-center mb-6">
-                <div className="bg-purple-100 p-3 rounded-xl mr-4">
-                  <Eye className="text-purple-600" size={32} />
-                </div>
-                <h2 className="text-3xl font-bold text-gray-900">Vision</h2>
-              </div>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                To become the trusted digital backbone that powers growth for SMBs worldwide.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold mb-12 text-center text-gray-900">
-            Our Values
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <ValueCard
-              icon={<Target size={32} />}
-              title="Precision"
-              description="Every solution is engineered with intention."
-            />
-            <ValueCard
-              icon={<Gem size={32} />}
-              title="Integrity"
-              description="No shortcuts. No overselling. No unnecessary complexity."
-            />
-            <ValueCard
-              icon={<Rocket size={32} />}
-              title="Innovation"
-              description="Practical automation, not hype-driven technology."
-            />
-            <ValueCard
-              icon={<CheckCircle size={32} />}
-              title="Performance"
-              description="Stable, predictable, scalable operations."
-            />
-            <ValueCard
-              icon={<Shield size={32} />}
-              title="Sustainability"
-              description="Systems that last, processes that evolve, results that compound."
-            />
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Meet the Founder — Tukee
-            </h2>
-            <p className="text-xl md:text-2xl text-indigo-100">
-              You don't get a vendor. You get a partner.
-            </p>
+      {/* Founder */}
+      <section className="bg-brand-mist py-20 md:py-28">
+        <div className="container-site grid gap-14 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <div className="rounded-2xl bg-brand-night p-8 text-white lg:sticky lg:top-28">
+              <div
+                className="flex h-20 w-20 items-center justify-center rounded-2xl border border-white/10 bg-brand-ink font-heading text-2xl font-bold text-white"
+                aria-hidden
+              >
+                CP
+              </div>
+              <h2 className="mt-6 font-heading text-2xl font-semibold text-white">Chandan P</h2>
+              <div className="mt-1 text-[15px] text-brand-silver">Founder &amp; Principal Solution Architect</div>
+              <div className="mt-4 flex items-center gap-2 text-sm text-brand-silver">
+                <MapPin size={15} className="text-brand-edge-red" aria-hidden /> Bengaluru, India
+              </div>
+              <a
+                href="https://www.linkedin.com/in/chandantukee"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-arrow-dark mt-6 border-t border-white/10 pt-6"
+              >
+                <Linkedin size={16} aria-hidden /> Connect on LinkedIn
+              </a>
+            </div>
           </div>
 
-          <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
-            <div className="space-y-6 text-lg text-gray-100 leading-relaxed">
+          <div className="lg:col-span-8">
+            <SectionIntro title="Infrastructure roots. Business and product perspective." />
+            <div className="mt-8 max-w-2xl space-y-5 text-lg leading-relaxed text-brand-slate">
               <p>
-                Tukee is a builder with years of experience solving problems across infrastructure, automation, integrations, and business operations. He's worked inside messy, chaotic technical environments — and knows exactly how to bring order.
+                Around 12 years of hands-on work, starting in IT infrastructure and systems administration for a multi-branch
+                dealership network (Khivraj Motors) — Windows servers, LAN/WAN, VMware ESXi and Hyper-V, and disaster recovery.
               </p>
-
-              <div className="bg-white/10 p-6 rounded-xl border border-white/20">
-                <h3 className="text-xl font-bold text-white mb-6 flex items-center">
-                  <Users className="mr-3" size={24} />
-                  He brings:
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <ul className="space-y-3">
-                    <li className="flex items-start">
-                      <Award className="text-indigo-300 mr-3 mt-1 flex-shrink-0" size={16} />
-                      <span>System-level thinking</span>
-                    </li>
-                    <li className="flex items-start">
-                      <Award className="text-indigo-300 mr-3 mt-1 flex-shrink-0" size={16} />
-                      <span>Deep practicality</span>
-                    </li>
-                    <li className="flex items-start">
-                      <Award className="text-indigo-300 mr-3 mt-1 flex-shrink-0" size={16} />
-                      <span>The ability to simplify complex problems</span>
-                    </li>
-                  </ul>
-                  <ul className="space-y-3">
-                    <li className="flex items-start">
-                      <Award className="text-indigo-300 mr-3 mt-1 flex-shrink-0" size={16} />
-                      <span>A calm, reliable problem-solving approach</span>
-                    </li>
-                    <li className="flex items-start">
-                      <Award className="text-indigo-300 mr-3 mt-1 flex-shrink-0" size={16} />
-                      <span>Full ownership from problem to resolution</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="text-center">
-                <p className="text-xl text-white font-medium bg-gradient-to-r from-indigo-200 to-purple-200 bg-clip-text text-transparent">
-                  For clients, Tukee acts as a mini CTO — someone who understands both business and technology, and executes both without unnecessary complexity.
-                </p>
-              </div>
+              <p>
+                At Infocruise Solutions, Chandan moved into business analysis and solution architecture, owning the product
+                lifecycle of <span className="font-semibold text-brand-night">MCollect</span>, an enterprise payment
+                reconciliation platform. Along the way he redesigned test and staging infrastructure into a hybrid AWS and
+                on-premises setup, cutting its recurring cost by around 60%.
+              </p>
             </div>
-          </div>
 
-          <div className="text-center mt-12">
-            <Link to="/contact">
-              <Button className="bg-white text-indigo-900 hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
-                Work with Tukee
-              </Button>
-            </Link>
+            <h3 className="mt-12 text-[13px] font-semibold uppercase tracking-[0.14em] text-brand-slate">Experience spans</h3>
+            <ol className="mt-5 flex flex-wrap items-center gap-y-3">
+              {career.map((c, i) => (
+                <li key={c} className="flex items-center">
+                  <span
+                    className={`rounded-full border px-3.5 py-1.5 text-sm font-medium ${
+                      i === career.length - 1
+                        ? 'border-brand-edge-red bg-brand-edge-red text-white'
+                        : 'border-brand-night/15 bg-white text-brand-night'
+                    }`}
+                  >
+                    {c}
+                  </span>
+                  {i < career.length - 1 && <span className="mx-1.5 h-px w-4 bg-brand-night/25" aria-hidden />}
+                </li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>
-    </div>
+
+      <CTASection
+        title="Work directly with the architect."
+        subtitle="Every engagement starts with a conversation with our Principal Solution Architect — about your business first, technology second."
+      />
     </>
-  );
-}
-
-interface ValueCardProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}
-
-function ValueCard({ icon, title, description }: ValueCardProps) {
-  return (
-    <div className="bg-gradient-to-br from-gray-50 to-white p-8 border border-gray-200 hover:border-indigo-300 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 rounded-xl group">
-      <div className="text-indigo-600 mb-4 group-hover:scale-110 transition-transform duration-300">
-        {icon}
-      </div>
-      <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-indigo-600 transition-colors">{title}</h3>
-      <p className="text-gray-600 leading-relaxed group-hover:text-gray-700">{description}</p>
-    </div>
   );
 }

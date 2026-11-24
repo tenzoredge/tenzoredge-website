@@ -1,171 +1,156 @@
-import { Car, ShoppingCart, Truck, Wrench, Building2, ArrowRight } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import Button from '../components/Button';
+import { Factory, MonitorSmartphone, Rocket, TrendingUp, ArrowRight } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import PageHeader from '../components/PageHeader';
+import SEO from '../components/SEO';
+import CTASection from '../components/CTASection';
+import { serviceByKey, ServiceKey } from '../data/services';
+
+interface Segment {
+  icon: LucideIcon;
+  name: string;
+  line: string;
+  sectors: string[];
+  challenges: string[];
+  help: string[];
+  services: ServiceKey[];
+}
+
+const segments: Segment[] = [
+  {
+    icon: Factory,
+    name: 'Traditional SMEs',
+    line: 'Established operating businesses modernising without unnecessary risk.',
+    sectors: ['Manufacturing', 'Distribution & trading', 'Logistics', 'Dealerships', 'Professional services'],
+    challenges: [
+      'Workflows on paper and spreadsheets',
+      'Accounting and billing on unprotected desktops',
+      'No in-house technology leader to challenge vendors',
+    ],
+    help: ['Digitize core workflows', 'Secure, consolidated infrastructure', 'Independent advice on ERP and software choices'],
+    services: ['business', 'infrastructure'],
+  },
+  {
+    icon: MonitorSmartphone,
+    name: 'Technology-driven SMEs',
+    line: 'Businesses whose product or platform is the business.',
+    sectors: ['B2B SaaS', 'Fintech & payments', 'Multi-tenant platforms', 'Digital commerce'],
+    challenges: [
+      'Codebases that are harder to extend each release',
+      'Cloud costs growing faster than revenue',
+      'AI tools in use without structure or governance',
+    ],
+    help: ['Architecture review and roadmap', 'Hybrid cloud and cost governance', 'Project-specific AI agents and skills'],
+    services: ['consulting', 'ai'],
+  },
+  {
+    icon: Rocket,
+    name: 'Startups',
+    line: 'Founders turning a validated idea into a product.',
+    sectors: ['Early-stage startups', 'Domain experts building products', 'Corporate spin-offs'],
+    challenges: [
+      'Turning a vision into clear requirements',
+      'Choosing a stack without following trends',
+      'Managing agencies without a technical lead',
+    ],
+    help: ['Product discovery and MVP scope', 'Architecture and stack decisions', 'Delivery governance to launch'],
+    services: ['product', 'consulting'],
+  },
+  {
+    icon: TrendingUp,
+    name: 'Growing businesses',
+    line: 'Companies scaling volume, locations and teams.',
+    sectors: ['Multi-branch retail', 'Expanding logistics', 'Growing service firms'],
+    challenges: [
+      'Infrastructure straining under new load',
+      'Systems bought piecemeal that don’t connect',
+      'Manual work growing with every new customer',
+    ],
+    help: ['Integration across ERP, CRM and finance', 'Automation of repetitive operations', 'Scalable, resilient infrastructure'],
+    services: ['business', 'infrastructure'],
+  },
+];
 
 export default function Industries() {
   return (
     <>
-      <Helmet>
-        <title>Tenzor - Industries | Sectors We Serve</title>
-        <meta name="description" content="Tenzor serves various industries including automotive, retail, logistics, manufacturing, and service companies. Discover how we drive operational excellence across sectors." />
-        <meta name="keywords" content="industries, automotive, retail, logistics, manufacturing, service companies, operational excellence" />
-        <link rel="canonical" href="https://tenzor.vercel.app/industries" />
-        <meta property="og:title" content="Industries We Serve - Tenzor" />
-        <meta property="og:description" content="Explore the industries and sectors where Tenzor drives operational excellence and business transformation." />
-        <meta property="og:url" content="https://tenzor.vercel.app/industries" />
-        <meta property="og:type" content="website" />
-      </Helmet>
-
-      <div>
-      <PageHeader
-        title="Industries We Serve"
-        subtitle="Tenzor works best with SMBs that face operational pressure and lack full in-house technical leadership"
+      <SEO
+        title="Who We Serve | Tenzor Edge"
+        description="Technology consulting and engineering for traditional SMEs, technology-driven SMEs, startups and growing businesses — calibrated to each organisation's size, complexity and stage."
+        canonicalPath="/industries"
       />
 
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-16">
-            <IndustryIcon icon={<Car size={32} />} label="Auto Industry" />
-            <IndustryIcon icon={<ShoppingCart size={32} />} label="Retail" />
-            <IndustryIcon icon={<Truck size={32} />} label="Logistics" />
-            <IndustryIcon icon={<Wrench size={32} />} label="Manufacturing" />
-            <IndustryIcon icon={<Building2 size={32} />} label="Service Companies" />
-            <IndustryIcon icon={<Building2 size={32} />} label="SMEs" />
-          </div>
+      <PageHeader
+        badge="Who we serve"
+        title="Technology fitted to your stage of growth."
+        subtitle="A fifty-person distributor and a venture-backed SaaS company need very different things. We design for what your organisation can realistically run and benefit from."
+        breadcrumbs={[{ label: 'Who We Serve' }]}
+      />
 
-          <div className="text-center max-w-3xl mx-auto">
-            <p className="text-lg text-gray-700 leading-relaxed">
-              We specialize in serving automobile dealerships and service chains, logistics and distribution companies, retail businesses, manufacturing subcontractors, service companies, and any SMB without a structured tech team.
-            </p>
-          </div>
-        </div>
-      </section>
+      {segments.map((s, i) => {
+        const Icon = s.icon;
+        return (
+          <section key={s.name} className={`py-16 md:py-24 ${i % 2 === 0 ? 'bg-white' : 'bg-brand-mist'}`}>
+            <div className="container-site grid gap-12 lg:grid-cols-12 lg:gap-16">
+              <div className="lg:col-span-5">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-night text-brand-edge-red">
+                  <Icon size={22} aria-hidden />
+                </span>
+                <h2 className="type-h2 mt-6 text-brand-night">{s.name}</h2>
+                <p className="mt-4 text-lg leading-relaxed text-brand-slate">{s.line}</p>
+                <ul className="mt-6 flex flex-wrap gap-2">
+                  {s.sectors.map((x) => (
+                    <li key={x} className="rounded-full border border-brand-night/15 bg-white px-3 py-1 text-[13px] text-brand-night">
+                      {x}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="grid gap-10 sm:grid-cols-2 lg:col-span-7">
+                <div>
+                  <h3 className="border-b-2 border-brand-night pb-3 font-heading text-lg font-semibold text-brand-night">
+                    What usually gets in the way
+                  </h3>
+                  <ul className="mt-5 space-y-4">
+                    {s.challenges.map((c) => (
+                      <li key={c} className="text-[15px] leading-relaxed text-brand-slate">
+                        {c}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="border-b-2 border-brand-edge-red pb-3 font-heading text-lg font-semibold text-brand-night">
+                    How we help
+                  </h3>
+                  <ul className="mt-5 space-y-4">
+                    {s.help.map((h) => (
+                      <li key={h} className="text-[15px] font-medium leading-relaxed text-brand-night">
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-6 flex flex-col gap-2">
+                    {s.services.map((k) => {
+                      const svc = serviceByKey(k);
+                      return (
+                        <Link key={k} to={svc.path} className="link-arrow">
+                          {svc.shortTitle} <ArrowRight size={14} aria-hidden />
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      })}
 
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold mb-12 text-center text-gray-900">
-            Common Problems We Solve
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <ProblemSolutionCard
-              number="1"
-              problem="Too Much Manual Work"
-              details="Repeating tasks, data duplication, human error."
-              solution="We automate it."
-            />
-            <ProblemSolutionCard
-              number="2"
-              problem="Disconnected Tools"
-              details="Different softwares that don't talk to each other."
-              solution="We integrate them."
-            />
-            <ProblemSolutionCard
-              number="3"
-              problem="Outdated Systems"
-              details="Legacy tools that block growth."
-              solution="We modernize them."
-            />
-            <ProblemSolutionCard
-              number="4"
-              problem="Unstable Infrastructure"
-              details="Servers go down, backups fail, monitoring is absent."
-              solution="We stabilize it."
-            />
-            <ProblemSolutionCard
-              number="5"
-              problem="Zero Visibility"
-              details="No dashboards, no tracking, no insights."
-              solution="We give clarity and control."
-            />
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold mb-8 text-gray-900">
-            The Result
-          </h2>
-          <p className="text-xl text-gray-700 leading-relaxed mb-12">
-            A business that operates with less friction, fewer errors, and faster execution — while spending less time on operational pain.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <ResultItem text="Less Friction" />
-            <ResultItem text="Fewer Errors" />
-            <ResultItem text="Faster Execution" />
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-blue-600 text-white text-center">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold mb-6">
-            Does your business face these challenges?
-          </h2>
-          <p className="text-xl mb-10 text-blue-100">
-            Let's discuss how we can bring stability and clarity to your operations.
-          </p>
-          <Link to="/contact">
-            <Button variant="secondary">Book a Clarity Call</Button>
-          </Link>
-        </div>
-      </section>
-    </div>
+      <CTASection
+        title="Tell us where your business is today."
+        subtitle="We’ll suggest the right starting point for your size, sector and stage."
+      />
     </>
-  );
-}
-
-interface IndustryIconProps {
-  icon: React.ReactNode;
-  label: string;
-}
-
-function IndustryIcon({ icon, label }: IndustryIconProps) {
-  return (
-    <div className="flex flex-col items-center text-center">
-      <div className="w-20 h-20 bg-blue-100 flex items-center justify-center mb-3 text-blue-600">
-        {icon}
-      </div>
-      <p className="text-sm font-medium text-gray-700">{label}</p>
-    </div>
-  );
-}
-
-interface ProblemSolutionCardProps {
-  number: string;
-  problem: string;
-  details: string;
-  solution: string;
-}
-
-function ProblemSolutionCard({ number, problem, details, solution }: ProblemSolutionCardProps) {
-  return (
-    <div className="bg-white p-8 border-2 border-gray-200 hover:border-blue-600 transition-colors">
-      <div className="flex items-start mb-4">
-        <div className="text-4xl font-bold text-blue-600 mr-4">{number}</div>
-        <div className="flex-1">
-          <h3 className="text-xl font-bold text-gray-900 mb-2">{problem}</h3>
-          <p className="text-gray-600 mb-4">{details}</p>
-          <div className="flex items-center text-blue-600 font-semibold">
-            <ArrowRight size={20} className="mr-2" />
-            <span>{solution}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-interface ResultItemProps {
-  text: string;
-}
-
-function ResultItem({ text }: ResultItemProps) {
-  return (
-    <div className="bg-gray-50 p-6 border-l-4 border-blue-600">
-      <p className="text-lg font-bold text-gray-900">{text}</p>
-    </div>
   );
 }

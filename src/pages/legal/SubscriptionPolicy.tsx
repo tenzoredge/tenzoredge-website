@@ -7,7 +7,7 @@ export default function SubscriptionPolicy() {
       <Helmet>
         <title>Subscription Policy | Tenzor Edge</title>
         <meta name="description" content="Subscription Policy for Tenzor Edge - Learn about our subscription services and billing policies." />
-        <link rel="canonical" href="https://tenzor.vercel.app/legal/subscription-policy" />
+        <link rel="canonical" href="https://tenzoredge.com/legal/subscription-policy" />
       </Helmet>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

@@ -7,7 +7,7 @@ export default function PrivacyPolicy() {
       <Helmet>
         <title>Privacy Policy | Tenzor Edge</title>
         <meta name="description" content="Privacy Policy for Tenzor Edge - Learn how we collect, use, and protect your personal information in compliance with DPDP Act 2023." />
-        <link rel="canonical" href="https://tenzor.vercel.app/legal/privacy-policy" />
+        <link rel="canonical" href="https://tenzoredge.com/legal/privacy-policy" />
       </Helmet>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">

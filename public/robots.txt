@@ -1,21 +1,9 @@
 User-agent: *
 Allow: /
 
-# Block access to sensitive files
-Disallow: /admin/
-Disallow: /api/
-Disallow: /_next/
+# Block access to private build or env assets
 Disallow: /.env
-
-# Allow access to CSS, JS, and image files
-Allow: *.css
-Allow: *.js
-Allow: *.png
-Allow: *.jpg
-Allow: *.jpeg
-Allow: *.gif
-Allow: *.svg
-Allow: *.ico
+Disallow: /.git
 
 # Sitemap
-Sitemap: https://tenzor.vercel.app/sitemap.xml
+Sitemap: https://tenzoredge.com/sitemap.xml
