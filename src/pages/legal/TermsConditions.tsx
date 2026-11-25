@@ -1,14 +1,10 @@
-import { Helmet } from 'react-helmet-async';
+import SEO from '../../components/SEO';
 import PageHeader from '../../components/PageHeader';
 
 export default function TermsConditions() {
   return (
     <>
-      <Helmet>
-        <title>Terms & Conditions | Tenzor Edge</title>
-        <meta name="description" content="Terms & Conditions for Tenzor Edge - Read our terms of service and usage policies." />
-        <link rel="canonical" href="https://tenzoredge.com/legal/terms-conditions" />
-      </Helmet>
+      <SEO title="Terms & Conditions | Tenzor Edge" description={"Terms & Conditions for Tenzor Edge - Read our terms of service and usage policies."} canonicalPath="/legal/terms-conditions" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <PageHeader

@@ -1,14 +1,10 @@
-import { Helmet } from 'react-helmet-async';
+import SEO from '../../components/SEO';
 import PageHeader from '../../components/PageHeader';
 
 export default function SubscriptionPolicy() {
   return (
     <>
-      <Helmet>
-        <title>Subscription Policy | Tenzor Edge</title>
-        <meta name="description" content="Subscription Policy for Tenzor Edge - Learn about our subscription services and billing policies." />
-        <link rel="canonical" href="https://tenzoredge.com/legal/subscription-policy" />
-      </Helmet>
+      <SEO title="Subscription Policy | Tenzor Edge" description={"Subscription Policy for Tenzor Edge - Learn about our subscription services and billing policies."} canonicalPath="/legal/subscription-policy" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <PageHeader

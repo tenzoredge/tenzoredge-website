@@ -1,41 +1,13 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Google Fonts: Sora & Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
-
-    <!-- Primary Meta Tags -->
-    <title>Tenzor Edge – Precision. Performance. Progress. | Technology Consulting & Engineering</title>
-    <meta name="title" content="Tenzor Edge – Precision. Performance. Progress. | Technology Consulting & Engineering" />
-    <meta name="description" content="Tenzor Edge is a technology consulting and engineering company. We help businesses design, integrate, automate, and engineer reliable technology infrastructure, business systems, and AI-enabled software processes." />
-    <meta name="keywords" content="technology consulting, solution architecture, infrastructure engineering, cloud migration, hybrid cloud, business digitization, systems integration, AI-enabled software engineering, SDLC automation, product leadership, Bangalore, India" />
-    <meta name="author" content="Tenzor Edge" />
-    <meta name="robots" content="index, follow" />
-    <meta name="language" content="English" />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://tenzoredge.com/" />
-    <meta property="og:title" content="Tenzor Edge – Precision. Performance. Progress." />
-    <meta property="og:description" content="Technology consulting, solution architecture, infrastructure engineering, and business systems designed to solve real operational challenges." />
-    <meta property="og:image" content="https://tenzoredge.com/brand/PNG/tenzor-edge-logo-for-dark-bg.png" />
-    <meta property="og:site_name" content="Tenzor Edge" />
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://tenzoredge.com/" />
-    <meta property="twitter:title" content="Tenzor Edge – Precision. Performance. Progress." />
-    <meta property="twitter:description" content="Technology consulting, solution architecture, infrastructure engineering, and business systems designed to solve real operational challenges." />
-    <meta property="twitter:image" content="https://tenzoredge.com/brand/PNG/tenzor-edge-logo-for-dark-bg.png" />
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://tenzoredge.com/" />
+    <!-- Page title, description, canonical, Open Graph and page structured data are injected
+         per page at build time (scripts/prerender.mjs) and kept in sync by react-helmet-async. -->
+    <!--app-head-->
 
     <!-- Structured Data: Organization & ProfessionalService -->
     <script type="application/ld+json">
@@ -47,7 +19,9 @@
           "@id": "https://tenzoredge.com/#organization",
           "name": "Tenzor Edge",
           "url": "https://tenzoredge.com",
-          "logo": "https://tenzoredge.com/brand/SVG/tenzor-edge-logo-for-dark-bg.svg",
+          "logo": "https://tenzoredge.com/brand/PNG/tenzor-edge-logo-for-light-bg.png",
+          "image": "https://tenzoredge.com/og/default.png",
+          "founder": { "@id": "https://tenzoredge.com/about#founder" },
           "slogan": "Precision. Performance. Progress.",
           "description": "Technology consulting and engineering company providing solution architecture, cloud & infrastructure engineering, business digitization, and AI-enabled software engineering.",
           "email": "support@tenzoredge.com",
@@ -86,9 +60,11 @@
 
     <meta name="theme-color" content="#0B0D12" />
     <meta name="msapplication-TileColor" content="#0B0D12" />
+    <!-- Lets CSS hide scroll-reveal content only when JavaScript can reveal it again. -->
+    <script>document.documentElement.classList.add('js')</script>
   </head>
   <body class="bg-brand-white text-brand-night antialiased selection:bg-brand-edge-red selection:text-white">
-    <div id="root"></div>
+    <div id="root"><!--app-html--></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

@@ -138,26 +138,36 @@ const founderDomains = [
   'Technology consulting',
 ];
 
-/* Layout + tone for each tile in the capability showcase */
+/* Layout + tone for each tile in the capability showcase.
+   Tablet: 2-column bento. Desktop: one row of five so the whole section fits on one screen. */
 const tiles: { key: ServiceKey; className: string; dark: boolean; big?: boolean; chips?: boolean }[] = [
-  { key: 'consulting', className: 'md:col-span-2 lg:col-span-7', dark: true, big: true, chips: true },
-  { key: 'infrastructure', className: 'md:col-span-2 lg:col-span-5', dark: false, chips: true },
-  { key: 'business', className: 'lg:col-span-4', dark: false },
-  { key: 'ai', className: 'lg:col-span-4', dark: true },
-  { key: 'product', className: 'md:col-span-2 lg:col-span-4', dark: false },
+  { key: 'consulting', className: 'md:col-span-2 lg:col-span-1', dark: true, big: true, chips: true },
+  { key: 'infrastructure', className: 'md:col-span-2 lg:col-span-1', dark: false, chips: true },
+  { key: 'business', className: 'lg:col-span-1', dark: false },
+  { key: 'ai', className: 'lg:col-span-1', dark: true },
+  { key: 'product', className: 'md:col-span-2 lg:col-span-1', dark: false },
 ];
 
 export default function Home() {
   return (
     <>
       <SEO
-        title="Tenzor Edge – Precision. Performance. Progress. | Technology Consulting & Engineering"
-        description="Tenzor Edge is a technology consulting and engineering company. We help businesses design, integrate, automate, and engineer reliable infrastructure, business systems, and AI-enabled software processes."
+        title="Tenzor Edge | Technology Consulting & Engineering, Bengaluru"
+        description="Founder-led technology consulting and engineering from Bengaluru. Solution architecture, cloud and infrastructure, business systems, AI-enabled software engineering and product leadership."
         canonicalPath="/"
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          '@id': 'https://tenzoredge.com/#website',
+          name: 'Tenzor Edge',
+          url: 'https://tenzoredge.com/',
+          inLanguage: 'en-IN',
+          publisher: { '@id': 'https://tenzoredge.com/#organization' },
+        }}
       />
 
-      {/* 1 — HERO */}
-      <section className="relative overflow-hidden bg-brand-night text-white">
+      {/* 1 — HERO: fills the first screen on desktop (viewport minus the 76px header) */}
+      <section className="relative flex flex-col overflow-hidden bg-brand-night text-white lg:min-h-[calc(100svh-77px)]">
         <div className="tech-grid-pattern-dark grid-fade pointer-events-none absolute inset-0" aria-hidden />
         <div
           className="pointer-events-none absolute -right-32 top-10 h-[620px] w-[620px] rounded-full opacity-[0.18] blur-[130px]"
@@ -165,34 +175,31 @@ export default function Home() {
           aria-hidden
         />
 
-        <div className="container-site relative pb-14 pt-12 md:pt-16 lg:pb-16 lg:pt-14">
-          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] lg:gap-12 xl:gap-16">
+        <div className="container-site relative flex flex-1 items-center py-12 md:py-16 lg:py-10 short:py-6">
+          <div className="grid w-full items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] lg:gap-12 xl:gap-16">
             <div>
-              <div className="eyebrow-dark mb-6">Technology consulting &amp; engineering</div>
-              <h1 className="font-heading text-[2.5rem] font-bold leading-[1.06] tracking-[-0.025em] text-white sm:text-[3.4rem] lg:text-[3.1rem] xl:text-[3.6rem]">
-                <span className="block">Complex technology.</span>
-                <span className="block">
-                  Clear business outcomes<span className="text-brand-edge-red">.</span>
-                </span>
+              <div className="eyebrow-dark mb-5">Technology consulting &amp; engineering</div>
+              <h1 className="font-heading text-[2.5rem] font-bold leading-[1.08] tracking-[-0.025em] text-white sm:text-[3.2rem] lg:text-[2.9rem] xl:text-[3.4rem] short:text-[2.6rem]">
+                Technology that works for your business<span className="text-brand-edge-red">.</span>
               </h1>
-              <p className="mt-6 max-w-[34rem] text-lg leading-relaxed text-brand-silver">
-                We design, connect and engineer the systems growing businesses depend on — from infrastructure and
-                cloud to business applications and AI-enabled software delivery.
+              <p className="mt-5 max-w-[33rem] text-lg leading-relaxed text-brand-silver">
+                We help growing businesses plan, build and run the right technology: from servers and cloud to business
+                software and AI.
               </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Link to="/contact" className="btn-primary">
                   Discuss Your Project
                   <ArrowRight size={18} aria-hidden />
                 </Link>
                 <Link to="/services" className="btn-ghost-dark">
-                  Explore Our Capabilities
+                  See Our Services
                 </Link>
               </div>
-              <dl className="mt-10 grid max-w-[34rem] grid-cols-3 gap-4 border-t border-white/10 pt-6">
+              <dl className="mt-8 short:mt-6 grid max-w-[33rem] grid-cols-3 gap-4 border-t border-white/10 pt-5">
                 {[
-                  ['12+ yrs', 'Hands-on experience'],
-                  ['5', 'Connected capabilities'],
-                  ['Full stack', 'Infra to application'],
+                  ['12+ years', 'Hands-on experience'],
+                  ['5 services', 'One connected team'],
+                  ['End to end', 'Plan, build and run'],
                 ].map(([v, l]) => (
                   <div key={l}>
                     <dt className="sr-only">{l}</dt>
@@ -203,7 +210,7 @@ export default function Home() {
               </dl>
             </div>
 
-            <div className="relative mx-auto w-full max-w-[600px] lg:max-w-none">
+            <div className="relative mx-auto w-full max-w-[600px] lg:max-w-[min(100%,calc((100svh-180px)*1.19))]">
               <Ecosystem />
             </div>
           </div>
@@ -217,7 +224,7 @@ export default function Home() {
                 <li key={s.key}>
                   <Link
                     to={s.path}
-                    className="group flex h-full items-center gap-3 py-5 transition-colors sm:px-4 lg:px-5 lg:first:pl-0"
+                    className="group flex h-full items-center gap-3 py-5 short:py-3.5 transition-colors sm:px-4 lg:px-5 lg:first:pl-0"
                   >
                     <span className="font-heading text-xs font-semibold text-brand-edge-red">{s.index}</span>
                     <span className="flex-1 text-sm font-medium leading-snug text-white transition-colors group-hover:text-brand-edge-red">
@@ -233,7 +240,7 @@ export default function Home() {
       </section>
 
       {/* 2 — BUSINESS CHALLENGES */}
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-white py-20 md:py-24 lg:py-20 short:py-12">
         <div className="container-site grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-28">
@@ -249,7 +256,7 @@ export default function Home() {
               const svc = serviceByKey(c.service);
               return (
                 <li key={c.title} className="border-b border-brand-night/10">
-                  <Link to={svc.path} className="group grid grid-cols-[44px_1fr] items-start gap-5 py-7 sm:grid-cols-[44px_1fr_auto] sm:items-center">
+                  <Link to={svc.path} className="group grid grid-cols-[44px_1fr] items-start gap-5 py-7 sm:grid-cols-[44px_1fr_auto] sm:items-center lg:py-[1.125rem] short:py-3">
                     <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-mist text-brand-edge-red transition-colors group-hover:bg-brand-edge-red group-hover:text-white">
                       <Icon size={20} aria-hidden />
                     </span>
@@ -270,7 +277,7 @@ export default function Home() {
       </section>
 
       {/* 3 — WHAT WE ENGINEER */}
-      <section className="bg-brand-mist py-20 md:py-28">
+      <section className="bg-brand-mist py-20 md:py-24 lg:py-20 short:py-12">
         <div className="container-site">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <SectionIntro
@@ -282,7 +289,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-12">
+          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-5 lg:gap-4">
             {tiles.map((t) => {
               const s = serviceByKey(t.key);
               return (
@@ -296,26 +303,34 @@ export default function Home() {
                   }`}
                 >
                   {/* Illustration band: fixed height so every tile in a row lines up */}
+                  {/* Illustration band: fixed height so every tile in a row lines up; the drawing is
+                      sized by the band's height so it is never cropped */}
                   <div
-                    className={`relative flex h-40 items-center justify-center overflow-hidden border-b px-8 ${
+                    className={`relative flex h-40 items-center justify-center overflow-hidden border-b px-8 py-5 lg:h-32 lg:px-4 lg:py-4 short:h-24 short:py-3 ${
                       t.dark ? 'tech-grid-pattern-dark border-white/[0.06] bg-brand-ink' : 'tech-grid-pattern border-brand-night/[0.06] bg-brand-mist/60'
                     }`}
                   >
-                    <div className="w-full max-w-[230px] transition-transform duration-500 group-hover:scale-[1.04]">
+                    <div className="aspect-[12/7] h-full max-w-full transition-transform duration-500 group-hover:scale-[1.04]">
                       <Motif kind={t.key} tone={t.dark ? 'dark' : 'light'} />
                     </div>
-                    <span
-                      className={`absolute left-5 top-4 font-heading text-sm font-semibold ${t.dark ? 'text-brand-edge-red' : 'text-brand-crimson'}`}
-                    >
-                      {s.index}
-                    </span>
                   </div>
 
-                  <div className="flex flex-1 flex-col p-7">
-                    <h3 className={`font-heading font-semibold leading-snug ${t.big ? 'text-2xl' : 'text-xl'}`}>{s.title}</h3>
-                    <p className={`mt-3 text-[15px] leading-relaxed ${t.dark ? 'text-brand-silver' : 'text-brand-slate'}`}>{s.summary}</p>
+                  <div className="flex flex-1 flex-col p-7 lg:p-5">
+                    <span className={`font-heading text-sm font-semibold ${t.dark ? 'text-brand-edge-red' : 'text-brand-crimson'}`}>
+                      {s.index}
+                    </span>
+                    <h3 className={`mt-2 font-heading font-semibold leading-snug ${t.big ? 'text-2xl' : 'text-xl'} lg:hidden`}>{s.title}</h3>
+                    {/* Desktop: the short name, always two lines tall, so the descriptions line up */}
+                    <h3
+                      className="mt-1.5 hidden min-h-[2lh] font-heading text-lg font-semibold leading-snug [text-wrap:balance] lg:block"
+                      title={s.title}
+                    >
+                      {s.shortTitle}
+                    </h3>
+                    <p className={`mt-3 text-[15px] leading-relaxed lg:hidden ${t.dark ? 'text-brand-silver' : 'text-brand-slate'}`}>{s.summary}</p>
+                    <p className={`mt-2 hidden text-[15px] leading-relaxed lg:block ${t.dark ? 'text-brand-silver' : 'text-brand-slate'}`}>{s.tagline}</p>
                     {t.chips && (
-                      <ul className="mt-5 flex flex-wrap gap-2">
+                      <ul className="mt-5 flex flex-wrap gap-2 lg:hidden">
                         {s.highlights.map((h) => (
                           <li
                             key={h}
@@ -327,7 +342,7 @@ export default function Home() {
                       </ul>
                     )}
                     <span
-                      className={`mt-auto inline-flex items-center gap-1.5 pt-6 text-sm font-semibold ${t.dark ? 'text-white' : 'text-brand-night'} group-hover:text-brand-edge-red`}
+                      className={`mt-auto inline-flex items-center gap-1.5 pt-6 text-sm font-semibold lg:pt-5 ${t.dark ? 'text-white' : 'text-brand-night'} group-hover:text-brand-edge-red`}
                     >
                       Explore service
                       <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" aria-hidden />
@@ -341,7 +356,7 @@ export default function Home() {
       </section>
 
       {/* 4 — OUR APPROACH */}
-      <section className="relative overflow-hidden bg-brand-night py-20 text-white md:py-28">
+      <section className="relative overflow-hidden bg-brand-night py-20 text-white md:py-24 lg:py-16 short:py-12">
         <div className="tech-grid-pattern-dark pointer-events-none absolute inset-0 opacity-60" aria-hidden />
         <div className="container-site relative">
           <SectionIntro
@@ -356,7 +371,7 @@ export default function Home() {
       </section>
 
       {/* 5 — WHO WE WORK WITH */}
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-white py-20 md:py-24 lg:py-20 short:py-12">
         <div className="container-site">
           <SectionIntro
             title="Who we work with"
@@ -387,7 +402,7 @@ export default function Home() {
       </section>
 
       {/* 6 — WHY TENZOR EDGE */}
-      <section className="bg-brand-mist py-20 md:py-28">
+      <section className="bg-brand-mist py-20 md:py-24 lg:py-20 short:py-12">
         <div className="container-site grid items-center gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <div className="figure-frame">
@@ -430,17 +445,17 @@ export default function Home() {
       </section>
 
       {/* 7 — FOUNDER */}
-      <section className="relative overflow-hidden bg-brand-night py-20 text-white md:py-28">
+      <section className="relative overflow-hidden bg-brand-night py-20 text-white md:py-24 lg:py-16 short:py-12">
         <div className="container-site relative grid gap-14 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-7">
             <Quote size={40} className="text-brand-edge-red" aria-hidden />
-            <blockquote className="mt-6 font-heading text-2xl font-medium leading-snug text-white sm:text-[2rem] sm:leading-[1.3]">
+            <blockquote className="mt-6 font-heading text-2xl font-medium leading-snug text-white sm:text-[2rem] sm:leading-[1.3] short:text-[1.7rem]">
               The goal isn’t to add more tools or more complexity. It’s to add only the technology a business can
               sustain, operate and measurably benefit from.
             </blockquote>
           </div>
           <div className="lg:col-span-5">
-            <div className="rounded-2xl border border-white/10 bg-brand-ink p-7 sm:p-9">
+            <div className="rounded-2xl border border-white/10 bg-brand-ink p-7 sm:p-9 short:p-7">
               <div className="flex items-center gap-5">
                 <div
                   className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-brand-night font-heading text-xl font-bold text-white"
@@ -464,7 +479,7 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-white/10 pt-6">
+              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-white/10 pt-6 short:mt-6 short:pt-5">
                 <Link to="/about" className="link-arrow-dark">
                   About Tenzor Edge <ArrowRight size={15} aria-hidden />
                 </Link>
@@ -483,7 +498,7 @@ export default function Home() {
       </section>
 
       {/* 8 — ENGAGEMENT MODELS */}
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-white py-20 md:py-24 lg:py-20 short:py-12">
         <div className="container-site">
           <SectionIntro title="Ways to work with us" intro="Start small with advice, or bring us in to own delivery. Most clients move along this line over time." />
 

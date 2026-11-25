@@ -1,14 +1,10 @@
-import { Helmet } from 'react-helmet-async';
+import SEO from '../../components/SEO';
 import PageHeader from '../../components/PageHeader';
 
 export default function ShippingDelivery() {
   return (
     <>
-      <Helmet>
-        <title>Shipping & Delivery Policy | Tenzor Edge</title>
-        <meta name="description" content="Shipping & Delivery Policy for Tenzor Edge - Learn about how our digital services are delivered." />
-        <link rel="canonical" href="https://tenzoredge.com/legal/shipping-delivery" />
-      </Helmet>
+      <SEO title="Shipping & Delivery Policy | Tenzor Edge" description={"Shipping & Delivery Policy for Tenzor Edge - Learn about how our digital services are delivered."} canonicalPath="/legal/shipping-delivery" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <PageHeader

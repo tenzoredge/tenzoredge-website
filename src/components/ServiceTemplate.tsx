@@ -2,7 +2,8 @@ import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
-import SEO from './SEO';
+import SEO, { ORG_ID } from './SEO';
+import { SITE_URL } from '../routes';
 import Breadcrumbs from './Breadcrumbs';
 import CTASection from './CTASection';
 import SectionIntro from './SectionIntro';
@@ -30,7 +31,34 @@ export default function ServiceTemplate({ c }: { c: ServicePageContent }) {
 
   return (
     <>
-      <SEO title={c.seo.title} description={c.seo.description} canonicalPath={svc.path} />
+      <SEO
+        title={c.seo.title}
+        description={c.seo.description}
+        canonicalPath={svc.path}
+        ogImage={`/og/${svc.key}.png`}
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'Service',
+          '@id': `${SITE_URL}${svc.path}#service`,
+          name: svc.title,
+          serviceType: svc.title,
+          description: c.seo.description,
+          url: `${SITE_URL}${svc.path}`,
+          provider: { '@id': ORG_ID },
+          areaServed: [
+            { '@type': 'Country', name: 'India' },
+            { '@type': 'Place', name: 'Worldwide' },
+          ],
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: `${svc.title} capabilities`,
+            itemListElement: c.capabilities.groups.map((g) => ({
+              '@type': 'Offer',
+              itemOffered: { '@type': 'Service', name: g.title, description: g.items.join('; ') },
+            })),
+          },
+        }}
+      />
 
       {/* HERO */}
       <section className="relative overflow-hidden bg-brand-night text-white">

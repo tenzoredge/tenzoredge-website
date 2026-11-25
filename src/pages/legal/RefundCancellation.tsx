@@ -1,14 +1,10 @@
-import { Helmet } from 'react-helmet-async';
+import SEO from '../../components/SEO';
 import PageHeader from '../../components/PageHeader';
 
 export default function RefundCancellation() {
   return (
     <>
-      <Helmet>
-        <title>Refund & Cancellation Policy | Tenzor Edge</title>
-        <meta name="description" content="Refund & Cancellation Policy for Tenzor Edge - Learn about our refund and cancellation procedures." />
-        <link rel="canonical" href="https://tenzoredge.com/legal/refund-cancellation" />
-      </Helmet>
+      <SEO title="Refund & Cancellation Policy | Tenzor Edge" description={"Refund & Cancellation Policy for Tenzor Edge - Learn about our refund and cancellation procedures."} canonicalPath="/legal/refund-cancellation" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <PageHeader

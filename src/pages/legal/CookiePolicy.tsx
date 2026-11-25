@@ -1,72 +1,129 @@
-import { Helmet } from 'react-helmet-async';
+import SEO from '../../components/SEO';
+import { Link } from 'react-router-dom';
+import type { ReactNode } from 'react';
 import PageHeader from '../../components/PageHeader';
+import { openConsentPreferences } from '../../lib/consent';
+
+const UPDATED = '24 November 2026';
+
+/* Keep this list in step with src/lib/analytics.ts and src/lib/consent.ts. */
+const items = [
+  {
+    name: 'tenzoredge_consent',
+    type: 'Local storage',
+    provider: 'Tenzor Edge',
+    category: 'Strictly necessary',
+    purpose: 'Remembers your privacy choice so we do not ask on every page',
+    duration: '12 months',
+  },
+  {
+    name: '_ga, _ga_<ID>',
+    type: 'Cookie',
+    provider: 'Google Analytics 4',
+    category: 'Analytics (consent)',
+    purpose: 'Distinguishes visits to count pages viewed and traffic sources',
+    duration: 'Up to 2 years',
+  },
+  {
+    name: '_clck, CLID, MUID',
+    type: 'Cookie',
+    provider: 'Microsoft Clarity',
+    category: 'Analytics (consent)',
+    purpose: 'Links page views in one visit for heatmaps and session replays',
+    duration: 'Up to 1 year',
+  },
+  {
+    name: '_clsk',
+    type: 'Cookie',
+    provider: 'Microsoft Clarity',
+    category: 'Analytics (consent)',
+    purpose: 'Groups page views into a single session',
+    duration: '1 day',
+  },
+];
+
+function H2({ children }: { children: ReactNode }) {
+  return <h2 className="mb-4 mt-12 font-heading text-2xl font-semibold text-brand-night first:mt-0">{children}</h2>;
+}
+function P({ children }: { children: ReactNode }) {
+  return <p className="mb-4 leading-relaxed text-brand-slate">{children}</p>;
+}
 
 export default function CookiePolicy() {
   return (
     <>
-      <Helmet>
-        <title>Cookie Policy | Tenzor Edge</title>
-        <meta name="description" content="Cookie Policy for Tenzor Edge - Learn how we use cookies and similar technologies on our website." />
-        <link rel="canonical" href="https://tenzoredge.com/legal/cookie-policy" />
-      </Helmet>
+      <SEO title="Cookie Policy | Tenzor Edge" description={"The cookies and browser storage the Tenzor Edge website uses, why, for how long, and how to change your choice."} canonicalPath="/legal/cookie-policy" />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <PageHeader
-          title="Cookie Policy"
-          subtitle="How we use cookies on our website"
-        />
+      <PageHeader
+        title="Cookie Policy"
+        subtitle="Exactly what this website stores in your browser, why, and how to change your choice."
+        breadcrumbs={[{ label: 'Cookie Policy' }]}
+        compact
+      />
 
-        <div className="prose prose-lg max-w-none">
-          <p className="text-gray-600 mb-8">
-            <strong>Last updated:</strong> January 10, 2026
-          </p>
+      <article className="container-site max-w-4xl py-16 md:py-20">
+        <p className="mb-10 text-sm text-brand-slate">
+          <strong className="text-brand-night">Last updated:</strong> {UPDATED}
+        </p>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">1. What Are Cookies</h2>
-            <p className="text-gray-700 mb-4">
-              Cookies are small text files that are stored on your device when you visit our website. They help us provide you with a better browsing experience and allow certain features to work properly.
-            </p>
-          </section>
+        <H2>1. Our approach</H2>
+        <P>
+          Only strictly necessary storage is used by default. Analytics cookies are set only after you switch analytics on,
+          and never for advertising. You can change your choice at any time:
+        </P>
+        <button
+          type="button"
+          onClick={openConsentPreferences}
+          className="mb-4 rounded-lg bg-brand-night px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-edge-red"
+        >
+          Open cookie preferences
+        </button>
 
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">2. How We Use Cookies</h2>
-            <p className="text-gray-700 mb-4">We use cookies for the following purposes:</p>
-            <ul className="list-disc pl-6 text-gray-700 mb-4">
-              <li><strong>Essential Cookies:</strong> Required for the website to function properly, such as maintaining your session and security features.</li>
-              <li><strong>Functional Cookies:</strong> Help us remember your preferences and settings.</li>
-              <li><strong>Analytics Cookies:</strong> Help us understand how visitors use our website (only if you consent).</li>
-            </ul>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">3. Cookie Consent</h2>
-            <p className="text-gray-700 mb-4">
-              When you first visit our website, we will ask for your consent to use non-essential cookies. You can accept or reject cookies through our cookie consent banner. You can withdraw your consent at any time by contacting us.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">4. Managing Cookies</h2>
-            <p className="text-gray-700 mb-4">
-              You can control and manage cookies through your browser settings. Most browsers allow you to refuse cookies or alert you when cookies are being sent. However, disabling essential cookies may affect the functionality of our website.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">5. Third-Party Cookies</h2>
-            <p className="text-gray-700 mb-4">
-              We may use third-party services that set their own cookies. These include analytics services and payment processors. We do not control these third-party cookies.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">6. Contact Us</h2>
-            <p className="text-gray-700">
-              If you have any questions about our use of cookies, please contact us at support@tenzoredge.com.
-            </p>
-          </section>
+        <H2>2. What we store</H2>
+        <div className="overflow-x-auto rounded-xl border border-brand-night/10">
+          <table className="w-full min-w-[680px] text-left text-sm">
+            <thead className="bg-brand-mist text-brand-night">
+              <tr>
+                <th className="p-3 font-semibold">Name</th>
+                <th className="p-3 font-semibold">Provider</th>
+                <th className="p-3 font-semibold">Category</th>
+                <th className="p-3 font-semibold">Purpose</th>
+                <th className="p-3 font-semibold">Duration</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-brand-night/10 text-brand-slate">
+              {items.map((i) => (
+                <tr key={i.name} className="align-top">
+                  <td className="p-3">
+                    <span className="font-mono text-[13px] text-brand-night">{i.name}</span>
+                    <span className="block text-xs">{i.type}</span>
+                  </td>
+                  <td className="p-3">{i.provider}</td>
+                  <td className="p-3">{i.category}</td>
+                  <td className="p-3">{i.purpose}</td>
+                  <td className="p-3">{i.duration}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      </div>
+
+        <H2>3. Withdrawing consent</H2>
+        <P>
+          Switching analytics off in Cookie preferences stops Google Analytics and Microsoft Clarity and deletes their cookies
+          from this site. You can also clear cookies in your browser settings at any time.
+        </P>
+
+        <H2>4. Contact</H2>
+        <P>
+          Questions about cookies or your personal data: support@tenzoredge.com. Full details of how we handle personal data
+          are in our{' '}
+          <Link to="/legal/privacy-policy" className="font-medium text-brand-edge-red hover:underline">
+            Privacy Notice
+          </Link>
+          .
+        </P>
+      </article>
     </>
   );
 }

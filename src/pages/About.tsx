@@ -82,6 +82,20 @@ export default function About() {
         title="About Tenzor Edge – Precision. Performance. Progress."
         description="Tenzor Edge is a founder-led technology consulting and engineering company with a flexible specialist delivery model, based in Bengaluru, India."
         canonicalPath="/about"
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'AboutPage',
+          url: 'https://tenzoredge.com/about',
+          about: { '@id': 'https://tenzoredge.com/#organization' },
+          mainEntity: {
+            '@type': 'Person',
+            '@id': 'https://tenzoredge.com/about#founder',
+            name: 'Chandan P',
+            jobTitle: 'Founder & Principal Solution Architect',
+            worksFor: { '@id': 'https://tenzoredge.com/#organization' },
+            sameAs: ['https://www.linkedin.com/in/chandantukee'],
+          },
+        }}
       />
 
       <PageHeader

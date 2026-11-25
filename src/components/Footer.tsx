@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { openConsentPreferences } from '../lib/consent';
 import { ArrowUpRight, Mail, MapPin, Linkedin } from 'lucide-react';
 
 export default function Footer() {
@@ -183,6 +184,13 @@ export default function Footer() {
             >
               Cookie Policy
             </Link>
+            <button
+              type="button"
+              onClick={openConsentPreferences}
+              className="hover:text-brand-silver transition-colors"
+            >
+              Cookie Preferences
+            </button>
             <Link
               to="/legal/refund-cancellation"
               className="hover:text-brand-silver transition-colors"
