@@ -180,19 +180,40 @@ export default function About() {
           </div>
 
           <div className="lg:col-span-8">
-            <SectionIntro title="Infrastructure roots. Business and product perspective." />
+            <SectionIntro title="Hi, I’m Chandan." />
             <div className="mt-8 max-w-2xl space-y-5 text-lg leading-relaxed text-brand-slate">
               <p>
-                Around 12 years of hands-on work, starting in IT infrastructure and systems administration for a multi-branch
-                dealership network (Khivraj Motors) — Windows servers, LAN/WAN, VMware ESXi and Hyper-V, and disaster recovery.
+                I started my career keeping servers, networks and backups running: the work nobody notices until it
+                stops. Over the years I moved closer to the business side, understanding how teams actually work,
+                designing solutions around that, and taking products from idea to launch.
               </p>
               <p>
-                At Infocruise Solutions, Chandan moved into business analysis and solution architecture, owning the product
-                lifecycle of <span className="font-semibold text-brand-night">MCollect</span>, an enterprise payment
-                reconciliation platform. Along the way he redesigned test and staging infrastructure into a hybrid AWS and
-                on-premises setup, cutting its recurring cost by around 60%.
+                That journey taught me one thing:{' '}
+                <span className="font-semibold text-brand-night">most technology problems are really business problems.</span>{' '}
+                The right answer is rarely the newest tool. It is the one that fits how your business runs, what it can
+                afford and where it wants to go.
+              </p>
+              <p>
+                I started Tenzor Edge so growing businesses can get that kind of thinking without the cost and overhead of
+                a large consultancy: one person who understands both the business and the technology, and stays
+                accountable from the first conversation to a working system.
               </p>
             </div>
+
+            <h3 className="mt-12 text-[13px] font-semibold uppercase tracking-[0.14em] text-brand-slate">How I work</h3>
+            <ul className="mt-5 grid max-w-2xl gap-4 sm:grid-cols-2">
+              {[
+                ['Business first', 'I learn how your business works before talking about technology.'],
+                ['Honest advice', 'If you don’t need something, I’ll tell you, even if it means less work for us.'],
+                ['No vendor lock-in', 'I recommend what fits you, not what pays a commission.'],
+                ['Hands-on', 'I stay involved through delivery, not just the plan.'],
+              ].map(([t, d]) => (
+                <li key={t} className="rounded-xl border border-brand-night/[0.08] bg-white p-5">
+                  <div className="font-heading font-semibold text-brand-night">{t}</div>
+                  <p className="mt-1.5 text-[15px] leading-relaxed text-brand-slate">{d}</p>
+                </li>
+              ))}
+            </ul>
 
             <h3 className="mt-12 text-[13px] font-semibold uppercase tracking-[0.14em] text-brand-slate">Experience spans</h3>
             <ol className="mt-5 flex flex-wrap items-center gap-y-3">
